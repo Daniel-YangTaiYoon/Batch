@@ -1,9 +1,9 @@
 @echo on
 
 :: Program Setting
-set Lineno=404
+set Lineno=406
 set monocolor=2nd
-set machineno=12
+set machineno=1
 
 :: Set Date
 ::  day=-1 => Yesterday log(Default setting). day=0 => Today log.
@@ -42,23 +42,30 @@ set Demuraip3=192.168.0.52
 set Demuraip4=192.168.0.53
 goto :checksummarypath1
 
-:: Check and Set Summary Log Path
+:: Check Summary Log Path
 :checksummarypath1
-if exist D:\Program\Inspector\ISPD_A_POCB\Log\SummaryCsv (goto :SetSummarypath1) else (goto :checksummarypath2)
-:checksummarypath2
-if exist D:\Program\POCB_%Lineno%_%Machineno% (goto :SetSummarypath2) else (goto :checksummarypath3_1)
+if exist D:\Program\Inspector\ISPD_A_POCB\Log\SummaryCsv (goto :setsummarypath1) else (goto :checksummarypath2_1)
+:checksummarypath2_1
+if exist D:\Program\POCB_%Lineno%_%Machineno%_AIM (goto :setsummarypath2_1) else (goto :checksummarypath2_2)
+:checksummarypath2_2
+if exist D:\Program\POCB_%Lineno%_%Machineno% (goto :setsummarypath2_2) else (goto :checksummarypath3_1)
 :checksummarypath3_1
 if exist D:\Program\POCB_%monocolor%_%Lineno%_0%machineno%\Log (goto :setsummarypath3_1) else (goto :checksummarypath3_2)
 :checksummarypath3_2
 if exist D:\Program\POCB_%monocolor%_%Lineno%_%machineno%\Log (goto :setsummarypath3_2) else (goto :end)
 
+:: Set Summary Log Path
 :setsummarypath1
 set summarypath=D:\Program\Inspector\ISPD_A_POCB\Log\SummaryCsv\%yyyy%%mm%
 set summarypathno=1
 goto :checkmlogpath1
-:setsummarypath2
+:setsummarypath2_1
+set summarypath=D:\Program\POCB_%Lineno%_%Machineno%_AIM\Log\Summary_LOG
+set summarypathno=2_1
+goto :checkmlogpath1
+:setsummarypath2_2
 set summarypath=D:\Program\POCB_%Lineno%_%Machineno%\Log\Summary_LOG
-set summarypathno=2
+set summarypathno=2_2
 goto :checkmlogpath1
 :setsummarypath3_1
 set summarypath=D:\Program\POCB_%monocolor%_%Lineno%_0%machineno%\Log\Summary_LOG
@@ -71,9 +78,11 @@ goto :checkmlogpath1
 
 :: Check and Set MLog Path
 :checkmlogpath1
-if exist D:\Program\Inspector\ISPD_A_POCB\Log\MLog (goto :Setmlogpath1) else (goto :checkmlogpath2)
-:checkmlogpath2
-if exist D:\Program\POCB_%Lineno%_%Machineno%\Log\M_LOG (goto :Setmlogpath2) else (goto :checkmlogpath3_1)
+if exist D:\Program\Inspector\ISPD_A_POCB\Log\MLog (goto :setmlogpath1) else (goto :checkmlogpath2_1)
+:checkmlogpath2_1
+if exist D:\Program\POCB_%Lineno%_%Machineno%_AIM\Log\M_LOG (goto :setmlogpath2_1) else (goto :checkmlogpath2_2)
+:checkmlogpath2_2
+if exist D:\Program\POCB_%Lineno%_%Machineno%\Log\M_LOG (goto :setmlogpath2_2) else (goto :checkmlogpath3_1)
 :checkmlogpath3_1
 if exist D:\Program\POCB_%monocolor%_%Lineno%_0%machineno%\Log\M_LOG (goto :setmlogpath3_1) else (goto :checkmlogpath3_2)
 :checkmlogpath3_2
@@ -83,9 +92,13 @@ if exist D:\Program\POCB_%monocolor%_%Lineno%_%machineno%\Log\M_LOG (goto :setml
 set mlogpath=D:\Program\Inspector\ISPD_A_POCB\Log\MLog\%yyyy%%mm%%dd%
 set mlogpathno=1
 goto :ipsetting
-:setmlogpath2
-set mlogpath=D:\Program\POCB_%Lineno%_%Machineno%\Log\M_LOG
-set mlogpathno=2
+:setmlogpath2_1
+set mlogpath=D:\Program\POCB_%Lineno%_%Machineno%_AIM\Log\M_LOG
+set mlogpathno=2_1
+goto :ipsetting
+:setmlogpath2_2
+set summarypath=D:\Program\POCB_%Lineno%_%Machineno%\Log\M_LOG
+set summarypathno=2_2
 goto :ipsetting
 :setmlogpath3_1
 set mlogpath=D:\Program\POCB_%monocolor%_%Lineno%_0%machineno%\Log\M_LOG
@@ -112,9 +125,11 @@ xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\%YYYY%%MM%%DD% 
 
 :: Check Summary Path and Copy
 :Checksummarypath_1
-if %summarypathno%==1 (goto :Summarycopy_1) else (goto :Checksummarypath_2)
-:Checksummarypath_2
-if %summarypathno%==2 (goto :Summarycopy_2) else (goto :Checksummarypath_3_1)
+if %summarypathno%==1 (goto :Summarycopy_1) else (goto :Checksummarypath_2_1)
+:Checksummarypath_2_1
+if %summarypathno%==2_1 (goto :Summarycopy_2_1) else (goto :Checksummarypath_2_2)
+:Checksummarypath_2_2
+if %summarypathno%==2_2 (goto :Summarycopy_2_2) else (goto :Checksummarypath_3_1)
 :Checksummarypath_3_1
 if %summarypathno%==3_1 (goto :Summarycopy_3_1) else (goto :Checksummarypath_3_2)
 :Checksummarypath_3_2
@@ -123,7 +138,10 @@ if %summarypathno%==3_2 (goto :Summarycopy_3_2) else (goto :end)
 :Summarycopy_1
 xcopy "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 goto :Checkmlogpath_1
-:Summarycopy_2
+:Summarycopy_2_1
+xcopy "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+goto :Checkmlogpath_1
+:Summarycopy_2_2
 xcopy "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 goto :Checkmlogpath_1
 :Summarycopy_3_1
@@ -135,9 +153,11 @@ goto :Checkmlogpath_1
 
 :: Check M Log path and Copy
 :Checkmlogpath_1
-if %mlogpathno%==1 (goto :Mlogcopy_1) else (goto :Checkmlogpath_2)
-:Checkmlogpath_2
-if %mlogpathno%==2 (goto :Mlogcopy_2) else (goto :Checkmlogpath_3_1)
+if %mlogpathno%==1 (goto :Mlogcopy_1) else (goto :Checkmlogpath_2_1)
+:Checkmlogpath_2_1
+if %mlogpathno%==2_1 (goto :Mlogcopy_2_1) else (goto :Checkmlogpath_2_2)
+:Checkmlogpath_2_2
+if %mlogpathno%==2_2 (goto :Mlogcopy_2_2) else (goto :Checkmlogpath_3_1)
 :Checkmlogpath_3_1
 if %mlogpathno%==3_1 (goto :Mlogcopy_3_1) else (goto :Checkmlogpath_3_2)
 :Checkmlogpath_3_2
@@ -146,7 +166,10 @@ if %mlogpathno%==3_2 (goto :Mlogcopy_3_2) else (goto :end)
 :Mlogcopy_1
 xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 goto :Channelcheck
-:Mlogcopy_2
+:Mlogcopy_2_1
+xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+goto :Channelcheck
+:Mlogcopy_2_2
 xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 goto :Channelcheck
 :Mlogcopy_3_1
