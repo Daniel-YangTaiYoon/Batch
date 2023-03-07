@@ -15,6 +15,7 @@ set "YYYY=%result:~0,4%"
 set "MM=%result:~4,2%"
 set "DD=%result:~6,2%"
 set "result=%yyyy%-%mm%-%dd%"
+echo %yyyy%-%mm%-%dd% Log Collecting
 
 :: Set Main PC IP List
 set ip406L_1st_1=10.121.43.144
@@ -101,12 +102,14 @@ goto :Scriptset
 
 :: Main script for copy log
 :Mainscript
+echo %lineno%L %monocolor% #%Machineno% Log collecting...
 xcopy "\\%ip%\Program\RVS\Demura Log Collect\%Mainfld%" "D:\Program\RVS\%lineno%L Log\%Masterfld%\%Mainfld%" /C /Q /Y /I /S
 if %machineno% gtr 13 (goto :monocolorchange)
 set /A Machineno+=1
 set Mainfld=%YYYY%%MM%%DD% %Lineno%L %monocolor% #%Machineno% Log
 set Mainip=ip%Lineno%L_%monocolor%_%Machineno%
 call set "ip=%%%Mainip%%%"
+echo Finished
 goto :checkping1
 
 :: Script end

@@ -1,5 +1,6 @@
-@echo on
+@echo off
 
+echo Start copy log from Demura PC to Main PC
 :: Program Setting
 set Lineno=406
 set monocolor=2nd
@@ -91,40 +92,28 @@ if exist D:\Program\POCB_%monocolor%_%Lineno%_%machineno%\Log\M_LOG (goto :setml
 :setmlogpath1
 set mlogpath=D:\Program\Inspector\ISPD_A_POCB\Log\MLog\%yyyy%%mm%%dd%
 set mlogpathno=1
-goto :ipsetting
+goto :Checksummarypath_1
 :setmlogpath2_1
 set mlogpath=D:\Program\POCB_%Lineno%_%Machineno%_AIM\Log\M_LOG
 set mlogpathno=2_1
-goto :ipsetting
+goto :Checksummarypath_1
 :setmlogpath2_2
 set summarypath=D:\Program\POCB_%Lineno%_%Machineno%\Log\M_LOG
 set summarypathno=2_2
-goto :ipsetting
+goto :Checksummarypath_1
 :setmlogpath3_1
 set mlogpath=D:\Program\POCB_%monocolor%_%Lineno%_0%machineno%\Log\M_LOG
 set mlogpathno=3_1
-goto :ipsetting
+goto :Checksummarypath_1
 :setmlogpath3_2
 set mlogpath=D:\Program\POCB_%monocolor%_%Lineno%_%machineno%\Log\M_LOG
 set mlogpathno=3_2
-goto :ipsetting
-
-:: Set IP
-:ipsetting
-set Demuraipset=Demuraip%Channelno%
-call set "demuraip=%%%Demuraipset%%%"
-goto :Mainscript
-
-:: Main Script
-:Mainscript
-mkdir "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %Channelno%"
-xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8\GeneralLogFile_%YYYY%-%MM%-%DD%_*.txt" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8\TrueTest_ErrorLog.txt" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-ren "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\TrueTest_ErrorLog.txt" "%YYYY%%MM%%DD% TrueTest_ErrorLog.txt"
-xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\%YYYY%%MM%%DD% Operation Log.txt" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+goto :Checksummarypath_1
 
 :: Check Summary Path and Copy
 :Checksummarypath_1
+echo Copy Summary Log...
+mkdir "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log"
 if %summarypathno%==1 (goto :Summarycopy_1) else (goto :Checksummarypath_2_1)
 :Checksummarypath_2_1
 if %summarypathno%==2_1 (goto :Summarycopy_2_1) else (goto :Checksummarypath_2_2)
@@ -136,28 +125,31 @@ if %summarypathno%==3_1 (goto :Summarycopy_3_1) else (goto :Checksummarypath_3_2
 if %summarypathno%==3_2 (goto :Summarycopy_3_2) else (goto :end)
 
 :Summarycopy_1
-xcopy "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-xcopy "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+xcopy "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log" /C /Q /Y /I /S
+xcopy "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log" /C /Q /Y /I /S
 goto :Checkmlogpath_1
 :Summarycopy_2_1
-xcopy "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-xcopy "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+xcopy "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log" /C /Q /Y /I /S
+xcopy "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log" /C /Q /Y /I /S
 goto :Checkmlogpath_1
 :Summarycopy_2_2
-xcopy "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-xcopy "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+xcopy "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log" /C /Q /Y /I /S
+xcopy "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log" /C /Q /Y /I /S
 goto :Checkmlogpath_1
 :Summarycopy_3_1
-xcopy "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-xcopy "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+xcopy "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log" /C /Q /Y /I /S
+xcopy "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log" /C /Q /Y /I /S
 goto :Checkmlogpath_1
 :Summarycopy_3_2
-xcopy "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-xcopy "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+xcopy "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log" /C /Q /Y /I /S
+xcopy "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log" /C /Q /Y /I /S
 goto :Checkmlogpath_1
 
 :: Check M Log path and Copy
 :Checkmlogpath_1
+echo Finished
+echo Copy M Log...
+mkdir "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log"
 if %mlogpathno%==1 (goto :Mlogcopy_1) else (goto :Checkmlogpath_2_1)
 :Checkmlogpath_2_1
 if %mlogpathno%==2_1 (goto :Mlogcopy_2_1) else (goto :Checkmlogpath_2_2)
@@ -169,30 +161,54 @@ if %mlogpathno%==3_1 (goto :Mlogcopy_3_1) else (goto :Checkmlogpath_3_2)
 if %mlogpathno%==3_2 (goto :Mlogcopy_3_2) else (goto :end)
 
 :Mlogcopy_1
-xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-goto :Channelcheck
+xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
+xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
+xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
+goto :ipsetting
 :Mlogcopy_2_1
-xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-goto :Channelcheck
+xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
+xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
+xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
+goto :ipsetting
 :Mlogcopy_2_2
-xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-goto :Channelcheck
+xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
+xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
+xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
+goto :ipsetting
 :Mlogcopy_3_1
-xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-goto :Channelcheck
+xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
+xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
+xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
+goto :ipsetting
 :Mlogcopy_3_2
-xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
+xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
+xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
+goto :ipsetting
+
+:: Set IP
+:ipsetting
+echo Finished
+set Demuraipset=Demuraip%Channelno%
+call set "demuraip=%%%Demuraipset%%%"
+goto :Mainscript
+
+:: Main Script
+:Mainscript
+echo Ch %Channelno% Log copy...
+mkdir "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %Channelno%"
+xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8\GeneralLogFile_%YYYY%-%MM%-%DD%_*.txt" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8\TrueTest_ErrorLog.txt" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+ren "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\TrueTest_ErrorLog.txt" "%YYYY%%MM%%DD% TrueTest_ErrorLog.txt"
+xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8\Dove2p0_PG.Dove2p0_PG.xml" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+ren "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\Dove2p0_PG.Dove2p0_PG.xml" "%YYYY%%MM%%DD% Dove2p0_PG.Dove2p0_PG.xml"
+xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8\Emu2p0_PG.Emu2p0_PG.xml" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+ren "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\Emu2p0_PG.Emu2p0_PG.xml" "%YYYY%%MM%%DD% Emu2p0_PG.Emu2p0_PG.xml"
+xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8\app.settings" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+ren "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\app.settings" "%YYYY%%MM%%DD% app.settings"
+xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\%YYYY%%MM%%DD% Operation Log.txt" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 goto :Channelcheck
+
 
 :: Channel Check if Ch is 4, End script
 :Channelcheck
