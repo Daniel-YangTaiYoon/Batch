@@ -137,17 +137,22 @@ if %summarypathno%==3_2 (goto :Summarycopy_3_2) else (goto :end)
 
 :Summarycopy_1
 xcopy "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+xcopy "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 goto :Checkmlogpath_1
 :Summarycopy_2_1
+xcopy "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 xcopy "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 goto :Checkmlogpath_1
 :Summarycopy_2_2
+xcopy "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 xcopy "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 goto :Checkmlogpath_1
 :Summarycopy_3_1
+xcopy "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 xcopy "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 goto :Checkmlogpath_1
 :Summarycopy_3_2
+xcopy "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 xcopy "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 goto :Checkmlogpath_1
 
@@ -165,17 +170,27 @@ if %mlogpathno%==3_2 (goto :Mlogcopy_3_2) else (goto :end)
 
 :Mlogcopy_1
 xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 goto :Channelcheck
 :Mlogcopy_2_1
+xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 goto :Channelcheck
 :Mlogcopy_2_2
+xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 goto :Channelcheck
 :Mlogcopy_3_1
+xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 goto :Channelcheck
 :Mlogcopy_3_2
+xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 goto :Channelcheck
 
