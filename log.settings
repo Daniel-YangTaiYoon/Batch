@@ -1,0 +1,4 @@
+# To enable logging, set the enabled flag below to true; to disable, set enabled to false.
+enabled=true
+# To mask a log category, add that category string to a new line below.
+# When reading the comma-delimited log, the category string is the first string after the date/time entries.
