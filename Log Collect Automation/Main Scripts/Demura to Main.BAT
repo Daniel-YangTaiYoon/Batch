@@ -198,8 +198,6 @@ goto :Mainscript
 echo Ch %Channelno% Log copy...
 mkdir "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %Channelno%"
 xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8\GeneralLogFile_%YYYY%-%MM%-%DD%_*.txt" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8\TrueTest_ErrorLog.txt" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-ren "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\TrueTest_ErrorLog.txt" "%YYYY%%MM%%DD% TrueTest_ErrorLog.txt"
 xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8\Dove2p0_PG.Dove2p0_PG.xml" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 ren "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\Dove2p0_PG.Dove2p0_PG.xml" "%YYYY%%MM%%DD% Dove2p0_PG.Dove2p0_PG.xml"
 xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8\Emu2p0_PG.Emu2p0_PG.xml" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
@@ -218,14 +216,11 @@ Set "out=\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8"
 ) > "%out%\log.settings"
 
 :: Delete General Log, Operation Log was generated before 60 days.
-
 goto :Channelcheck
-
 
 :: Channel Check if Ch is 4, End script
 :Channelcheck
 if %channelno%==4 (goto :end) else (goto :channelnoincrease)
-
 
 :: Increase Channel +1 and go back to IP Setting script
 :channelnoincrease
@@ -233,7 +228,7 @@ set /A Channelno+=1
 goto :ipsetting
 
 :: Generate log.settings file to enable General logging function
-Set "out=E:\OneDrive - Radiant Vision Systems\Yang Tai Yoon\BATCH"
+Set "out=\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8"
 (
   Echo;# To enable logging, set the enabled flag below to true; to disable, set enabled to false.
   Echo;enabled=true
@@ -248,18 +243,3 @@ forfiles /P "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData" /S /M *O
 :: Script end
 :end
 exit
-
-
-
-Set "out=C:\users\YourUserName\Desktop"
-(
-  Echo;# To enable logging, set the enabled flag below to true; to disable, set enabled to false.
-  Echo;enabled=False
-  Echo;# To mask a log category, add that category string to a new line below.
-  Echo;# When reading the comma-delimited log, the category string is the first string after the date/time entries.
-) > "%out%\YourFileName.txt"
-
-# To enable logging, set the enabled flag below to true; to disable, set enabled to false.
-enabled=False
-# To mask a log category, add that category string to a new line below.
-# When reading the comma-delimited log, the category string is the first string after the date/time entries.
