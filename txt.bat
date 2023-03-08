@@ -1,9 +1,11 @@
 @echo off
-    SETLOCAL=ENABLEDELAYEDEXPANSION
 
-    rename text.file text.tmp
-    for /f %%a in (text.tmp) do (
-        set foo=%%a
-        if !foo!==ex3 set foo=ex5
-        echo !foo! >> text.file) 
-del text.tmp
+if exist "E:\OneDrive - Radiant Vision Systems\Yang Tai Yoon\Programming\BATCH\daniel.csv" (.) else (
+    echo No Summary Log
+) > "E:\OneDrive - Radiant Vision Systems\Yang Tai Yoon\Programming\BATCH\Log Collect Automation\Main Scripts\No Summary Log.txt"
+
+pause
+
+:pass
+echo pass
+pause

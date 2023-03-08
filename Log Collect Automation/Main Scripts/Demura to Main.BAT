@@ -127,22 +127,52 @@ if %summarypathno%==3_2 (goto :Summarycopy_3_2) else (goto :end)
 :Summarycopy_1
 xcopy "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log" /C /Q /Y /I /S
 xcopy "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log" /C /Q /Y /I /S
+if exist "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log\No Summary Log.txt"
+if exist "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log\No Summary Log.txt"
 goto :Checkmlogpath_1
 :Summarycopy_2_1
 xcopy "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log" /C /Q /Y /I /S
 xcopy "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log" /C /Q /Y /I /S
+if exist "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log\No Summary Log.txt"
+if exist "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log\No Summary Log.txt"
 goto :Checkmlogpath_1
 :Summarycopy_2_2
 xcopy "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log" /C /Q /Y /I /S
 xcopy "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log" /C /Q /Y /I /S
+if exist "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log\No Summary Log.txt"
+if exist "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log\No Summary Log.txt"
 goto :Checkmlogpath_1
 :Summarycopy_3_1
 xcopy "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log" /C /Q /Y /I /S
 xcopy "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log" /C /Q /Y /I /S
+if exist "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log\No Summary Log.txt"
+if exist "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log\No Summary Log.txt"
 goto :Checkmlogpath_1
 :Summarycopy_3_2
 xcopy "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log" /C /Q /Y /I /S
 xcopy "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log" /C /Q /Y /I /S
+if exist "%summarypath%\E_DJ_1G1O-P1_Summary_%yyyy%%mm%%dd%_*.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log\No Summary Log.txt"
+if exist "%summarypath%\POCB_Summary_LOG_*_%yyyy%%mm%%dd%.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\Summary_Log\No Summary Log.txt"
 goto :Checkmlogpath_1
 
 :: Check M Log path and Copy
@@ -164,26 +194,71 @@ if %mlogpathno%==3_2 (goto :Mlogcopy_3_2) else (goto :end)
 xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
 xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
 xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
+if exist "%mlogpath%\MLog_*.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log\No M_Log.txt"
+if exist "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log\No M_Log.txt"
+if exist "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log\No M_Log.txt"
 goto :ipsetting
 :Mlogcopy_2_1
 xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
 xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
 xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
+if exist "%mlogpath%\MLog_*.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log\No M_Log.txt"
+if exist "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log\No M_Log.txt"
+if exist "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log\No M_Log.txt"
 goto :ipsetting
 :Mlogcopy_2_2
 xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
 xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
 xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
+if exist "%mlogpath%\MLog_*.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log\No M_Log.txt"
+if exist "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log\No M_Log.txt"
+if exist "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log\No M_Log.txt"
 goto :ipsetting
 :Mlogcopy_3_1
 xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
 xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
 xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
+if exist "%mlogpath%\MLog_*.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log\No M_Log.txt"
+if exist "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log\No M_Log.txt"
+if exist "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log\No M_Log.txt"
 goto :ipsetting
 :Mlogcopy_3_2
 xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
 xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
 xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
+if exist "%mlogpath%\MLog_*.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log\No M_Log.txt"
+if exist "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log\No M_Log.txt"
+if exist "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" (.) else (
+    echo No Summary Log
+) > "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log\No M_Log.txt"
 goto :ipsetting
 
 :: Set IP
@@ -207,6 +282,7 @@ ren "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\app.settings" "%
 xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\%YYYY%%MM%%DD% Operation Log.txt" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 
 :: Make log.settings file to enable General log setting to true
+echo Change General Logging setting...
 Set "out=\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8"
 (
   Echo;# To enable logging, set the enabled flag below to true; to disable, set enabled to false.
@@ -215,7 +291,12 @@ Set "out=\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8"
   Echo;# When reading the comma-delimited log, the category string is the first string after the date/time entries.
 ) > "%out%\log.settings"
 
-:: Delete General Log, Operation Log was generated before 60 days.
+:: Delete General Log and Operation Log was generated before 60 days
+echo Delete Old General Log...
+forfiles /P "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8" /S /M GeneralLogFile_*.txt /D -60 /C "cmd /c del @PATH"
+echo Delete Old Operation Log...
+forfiles /P "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData" /S /M *Operation Log.txt /D -60 /C "cmd /c del @PATH"
+
 goto :Channelcheck
 
 :: Channel Check if Ch is 4, End script
@@ -226,19 +307,6 @@ if %channelno%==4 (goto :end) else (goto :channelnoincrease)
 :channelnoincrease
 set /A Channelno+=1
 goto :ipsetting
-
-:: Generate log.settings file to enable General logging function
-Set "out=\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8"
-(
-  Echo;# To enable logging, set the enabled flag below to true; to disable, set enabled to false.
-  Echo;enabled=true
-  Echo;# To mask a log category, add that category string to a new line below.
-  Echo;# When reading the comma-delimited log, the category string is the first string after the date/time entries.
-) > "%out%\log.settings"
-
-:: Delete General Log and Operation Log was generated before 60 days
-forfiles /P "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8" /S /M GeneralLogFile_*.txt /D -60 /C "cmd /c del @PATH"
-forfiles /P "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData" /S /M *Operation Log.txt /D -60 /C "cmd /c del @PATH"
 
 :: Script end
 :end
