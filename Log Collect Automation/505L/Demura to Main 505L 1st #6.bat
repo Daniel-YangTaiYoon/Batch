@@ -2,9 +2,9 @@
 
 echo Start copy log from Demura PC to Main PC
 :: Program Setting
-set Lineno=406
-set monocolor=2nd
-set machineno=1
+set Lineno=505
+set monocolor=1st
+set machineno=6
 
 :: Set Date
 ::  day=-1 => Yesterday log(Default setting). day=0 => Today log.
@@ -207,6 +207,18 @@ ren "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\Emu2p0_PG.Emu2p0
 xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8\app.settings" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 ren "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\app.settings" "%YYYY%%MM%%DD% app.settings"
 xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\%YYYY%%MM%%DD% Operation Log.txt" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+
+:: Make log.settings file to enable General log setting to true
+Set "out=\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8"
+(
+  Echo;# To enable logging, set the enabled flag below to true; to disable, set enabled to false.
+  Echo;enabled=true
+  Echo;# To mask a log category, add that category string to a new line below.
+  Echo;# When reading the comma-delimited log, the category string is the first string after the date/time entries.
+) > "%out%\log.settings"
+
+:: Delete General Log, Operation Log was generated before 60 days.
+
 goto :Channelcheck
 
 
@@ -220,6 +232,34 @@ if %channelno%==4 (goto :end) else (goto :channelnoincrease)
 set /A Channelno+=1
 goto :ipsetting
 
+:: Generate log.settings file to enable General logging function
+Set "out=E:\OneDrive - Radiant Vision Systems\Yang Tai Yoon\BATCH"
+(
+  Echo;# To enable logging, set the enabled flag below to true; to disable, set enabled to false.
+  Echo;enabled=true
+  Echo;# To mask a log category, add that category string to a new line below.
+  Echo;# When reading the comma-delimited log, the category string is the first string after the date/time entries.
+) > "%out%\log.settings"
+
+:: Delete General Log and Operation Log was generated before 60 days
+forfiles /P "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8" /S /M GeneralLogFile_*.txt /D -60 /C "cmd /c del @PATH"
+forfiles /P "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData" /S /M *Operation Log.txt /D -60 /C "cmd /c del @PATH"
+
 :: Script end
 :end
 exit
+
+
+
+Set "out=C:\users\YourUserName\Desktop"
+(
+  Echo;# To enable logging, set the enabled flag below to true; to disable, set enabled to false.
+  Echo;enabled=False
+  Echo;# To mask a log category, add that category string to a new line below.
+  Echo;# When reading the comma-delimited log, the category string is the first string after the date/time entries.
+) > "%out%\YourFileName.txt"
+
+# To enable logging, set the enabled flag below to true; to disable, set enabled to false.
+enabled=False
+# To mask a log category, add that category string to a new line below.
+# When reading the comma-delimited log, the category string is the first string after the date/time entries.
