@@ -1,9 +1,21 @@
 @echo off
 
-:: Please input machine information that you need to share
-set lineno=402
+:: Program Setting
+set Lineno=401
 set monocolor=1st
-set /A machineno=1
+
+:: Set Date
+::  day=-1 => Yesterday log(Default setting). day=0 => Today log.
+set day=-1
+echo >"%temp%\%~n0.vbs" s=DateAdd("d",%day%,now) : d=weekday(s)
+echo>>"%temp%\%~n0.vbs" WScript.Echo year(s)^& right(100+month(s),2)^& right(100+day(s),2)
+for /f %%a in ('cscript /nologo "%temp%\%~n0.vbs"') do set "result=%%a"
+del "%temp%\%~n0.vbs"
+set "YYYY=%result:~0,4%"
+set "MM=%result:~4,2%"
+set "DD=%result:~6,2%"
+set "result=%yyyy%-%mm%-%dd%"
+echo %yyyy%-%mm%-%dd% Log Collecting
 
 :: Set Main PC IP List
 set ip301L_1st_1=10.119.159.140
@@ -162,20 +174,51 @@ set ip505L_2nd_10=10.121.56.127
 set ip505L_2nd_11=10.121.56.122
 set ip505L_2nd_12=10.121.56.121
 
-:: Copy to Main PC
-:copy
-if %machineno%==13 goto :monocolorcheck
+:: Set MasterPC log collecting folder name ex) 20230227 406L Log
+set Masterfld=%YYYY%%MM%%DD% %Lineno%L Log
+
+:Scriptset
+:: Set Machine No
+set /A Machineno=1
+:: Set Main Folder and IP 20230302 505L Log > 20230302 505L 1st #1 Log
+set Mainfld=%YYYY%%MM%%DD% %Lineno%L %monocolor% #%Machineno% Log
 set Mainip=ip%Lineno%L_%monocolor%_%Machineno%
 call set "ip=%%%Mainip%%%"
-echo Copy batch file to %lineno%L %monocolor% #%machineno%
-xcopy "Demura to Main %lineno%L %monocolor% #%machineno%.bat" "\\%ip%\Program\RVS"
-xcopy "%lineno%L %monocolor% #%machineno% log collect scheduler.xml" "\\%ip%\Program\RVS"
-set /A machineno+=1
-goto :copy
+goto :checkping1
 
-:monocolorcheck
-if %monocolor%==2nd goto :end
+:: Ping check 1st
+:checkping1
+ping %ip% -n 1 > nul
+if %errorlevel%==0 (goto :Mainscript) else (goto :Checkping2)
+
+:: Ping check 2nd (+1 for machine no)
+:checkping2
+if %machineno% gtr 13 (goto :monocolorchange)
+set /A Machineno+=1
+set Mainfld=%YYYY%%MM%%DD% %Lineno%L %monocolor% #%Machineno% Log
+set Mainip=ip%Lineno%L_%monocolor%_%Machineno%
+call set "ip=%%%Mainip%%%"
+ping %ip% -n 1 > nul
+if %errorlevel%==0 (goto :Mainscript) else (goto :Checkping2)
+
+:: If 1st, change to 2nd. If 2nd, end script.
+:monocolorchange
+if %monocolor%==2nd (goto :end)
 set monocolor=2nd
-set /A machineno=1
+goto :Scriptset
 
-goto :copy
+:: Main script for copy log
+:Mainscript
+echo %lineno%L %monocolor% #%Machineno% Log collecting...
+xcopy "\\%ip%\Program\RVS\Demura Log Collect\%Mainfld%" "D:\Program\RVS\%lineno%L Log\%Masterfld%\%Mainfld%" /C /Q /Y /I /S
+if %machineno% gtr 13 (goto :monocolorchange)
+set /A Machineno+=1
+set Mainfld=%YYYY%%MM%%DD% %Lineno%L %monocolor% #%Machineno% Log
+set Mainip=ip%Lineno%L_%monocolor%_%Machineno%
+call set "ip=%%%Mainip%%%"
+echo Finished
+goto :checkping1
+
+:: Script end
+:end
+exit

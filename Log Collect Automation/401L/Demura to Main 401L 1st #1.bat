@@ -2,7 +2,7 @@
 
 echo Start copy log from Demura PC to Main PC
 :: Program Setting
-set Lineno=402
+set Lineno=401
 set monocolor=1st
 set machineno=1
 

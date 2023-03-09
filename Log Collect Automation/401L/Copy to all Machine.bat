@@ -1,7 +1,7 @@
 @echo off
 
 :: Please input machine information that you need to share
-set lineno=402
+set lineno=401
 set monocolor=1st
 set /A machineno=1
 
@@ -169,7 +169,7 @@ set Mainip=ip%Lineno%L_%monocolor%_%Machineno%
 call set "ip=%%%Mainip%%%"
 echo Copy batch file to %lineno%L %monocolor% #%machineno%
 xcopy "Demura to Main %lineno%L %monocolor% #%machineno%.bat" "\\%ip%\Program\RVS"
-xcopy "%lineno%L %monocolor% #%machineno% log collect scheduler.xml" "\\%ip%\Program\RVS"
+xcopy ""
 set /A machineno+=1
 goto :copy
 
