@@ -98,8 +98,8 @@ set mlogpath=D:\Program\POCB_%Lineno%_%Machineno%_AIM\Log\M_LOG
 set mlogpathno=2_1
 goto :Checksummarypath_1
 :setmlogpath2_2
-set summarypath=D:\Program\POCB_%Lineno%_%Machineno%\Log\M_LOG
-set summarypathno=2_2
+set mlogpath=D:\Program\POCB_%Lineno%_%Machineno%\Log\M_LOG
+set mlogpathno=2_2
 goto :Checksummarypath_1
 :setmlogpath3_1
 set mlogpath=D:\Program\POCB_%monocolor%_%Lineno%_0%machineno%\Log\M_LOG
@@ -164,26 +164,32 @@ if %mlogpathno%==3_2 (goto :Mlogcopy_3_2) else (goto :end)
 xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
 xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
 xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
-goto :ipsetting
+goto :deletebackup
 :Mlogcopy_2_1
 xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
 xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
 xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
-goto :ipsetting
+goto :deletebackup
 :Mlogcopy_2_2
 xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
 xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
 xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
-goto :ipsetting
+goto :deletebackup
 :Mlogcopy_3_1
 xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
 xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
 xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
-goto :ipsetting
+goto :deletebackup
 :Mlogcopy_3_2
 xcopy "%mlogpath%\MLog_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
 xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
 xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
+goto :deletebackup
+
+::Delete old backup files (After 60 days)
+:deletebackup
+echo Delete Old Backup Files
+FORFILES /p "D:\Program\RVS\Demura Log Collect" /S /M "*Log" /D -60 /C "cmd /c IF @isdir == TRUE rd /S /Q @path"
 goto :ipsetting
 
 :: Set IP
@@ -197,9 +203,9 @@ goto :Mainscript
 :Mainscript
 echo Ch %Channelno% Log copy...
 mkdir "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %Channelno%"
+mkdir "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %Channelno%\Sequence"
+mkdir "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %Channelno%\Master"
 xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8\GeneralLogFile_%YYYY%-%MM%-%DD%_*.txt" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8\TrueTest_ErrorLog.txt" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-ren "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\TrueTest_ErrorLog.txt" "%YYYY%%MM%%DD% TrueTest_ErrorLog.txt"
 xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8\Dove2p0_PG.Dove2p0_PG.xml" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 ren "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\Dove2p0_PG.Dove2p0_PG.xml" "%YYYY%%MM%%DD% Dove2p0_PG.Dove2p0_PG.xml"
 xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8\Emu2p0_PG.Emu2p0_PG.xml" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
@@ -207,59 +213,36 @@ ren "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\Emu2p0_PG.Emu2p0
 xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8\app.settings" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 ren "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\app.settings" "%YYYY%%MM%%DD% app.settings"
 xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\%YYYY%%MM%%DD% Operation Log.txt" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\Sequence\*.seqxc" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\Sequence" /C /Q /Y /I
+xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\Sequence\Master\*.seqxc" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\Master" /C /Q /Y /I
 
 :: Make log.settings file to enable General log setting to true
+echo Change General Logging setting...
 Set "out=\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8"
 (
   Echo;# To enable logging, set the enabled flag below to true; to disable, set enabled to false.
-  Echo;enabled=true
+  Echo;enabled=True
   Echo;# To mask a log category, add that category string to a new line below.
   Echo;# When reading the comma-delimited log, the category string is the first string after the date/time entries.
 ) > "%out%\log.settings"
 
-:: Delete General Log, Operation Log was generated before 60 days.
+:: Delete Original General Log and Operation Log after 30 days
+echo Delete Old General Log...
+FORFILES /p "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8" /S /M "GeneralLogFile_*.txt" /D -30 /C "cmd /c IF @isdir == TRUE rd /S /Q @path"
+echo Delete Old Operation Log...
+FORFILES /p "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData" /S /M "*Operation Log.txt" /D -30 /C "cmd /c IF @isdir == TRUE rd /S /Q @path"
 
 goto :Channelcheck
-
 
 :: Channel Check if Ch is 4, End script
 :Channelcheck
 if %channelno%==4 (goto :end) else (goto :channelnoincrease)
-
 
 :: Increase Channel +1 and go back to IP Setting script
 :channelnoincrease
 set /A Channelno+=1
 goto :ipsetting
 
-:: Generate log.settings file to enable General logging function
-Set "out=E:\OneDrive - Radiant Vision Systems\Yang Tai Yoon\BATCH"
-(
-  Echo;# To enable logging, set the enabled flag below to true; to disable, set enabled to false.
-  Echo;enabled=true
-  Echo;# To mask a log category, add that category string to a new line below.
-  Echo;# When reading the comma-delimited log, the category string is the first string after the date/time entries.
-) > "%out%\log.settings"
-
-:: Delete General Log and Operation Log was generated before 60 days
-forfiles /P "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8" /S /M GeneralLogFile_*.txt /D -60 /C "cmd /c del @PATH"
-forfiles /P "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData" /S /M *Operation Log.txt /D -60 /C "cmd /c del @PATH"
-
 :: Script end
 :end
 exit
-
-
-
-Set "out=C:\users\YourUserName\Desktop"
-(
-  Echo;# To enable logging, set the enabled flag below to true; to disable, set enabled to false.
-  Echo;enabled=False
-  Echo;# To mask a log category, add that category string to a new line below.
-  Echo;# When reading the comma-delimited log, the category string is the first string after the date/time entries.
-) > "%out%\YourFileName.txt"
-
-# To enable logging, set the enabled flag below to true; to disable, set enabled to false.
-enabled=False
-# To mask a log category, add that category string to a new line below.
-# When reading the comma-delimited log, the category string is the first string after the date/time entries.

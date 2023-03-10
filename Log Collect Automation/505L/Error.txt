@@ -1,0 +1,1 @@
+ERROR: UNC paths (\\machine\share) are not supported.

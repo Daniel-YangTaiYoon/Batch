@@ -2,7 +2,7 @@
 
 echo Start copy log from Demura PC to Main PC
 :: Program Setting
-set Lineno=404
+set Lineno=505
 set monocolor=1st
 set machineno=1
 
@@ -213,8 +213,8 @@ ren "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\Emu2p0_PG.Emu2p0
 xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8\app.settings" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 ren "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\app.settings" "%YYYY%%MM%%DD% app.settings"
 xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\%YYYY%%MM%%DD% Operation Log.txt" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
-xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\Sequence\*.seqxc" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\Sequence" /C /Q /Y /I /S
-xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\Sequence\Master\*.seqxc" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\Master" /C /Q /Y /I /S
+xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\Sequence\*.seqxc" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\Sequence" /C /Q /Y /I
+xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\Sequence\Master\*.seqxc" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\Master" /C /Q /Y /I
 
 :: Make log.settings file to enable General log setting to true
 echo Change General Logging setting...

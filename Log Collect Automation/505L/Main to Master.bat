@@ -29,6 +29,54 @@ set ip301L_2nd_8=10.119.159.229
 set ip301L_2nd_9=10.119.135.31
 set ip301L_2nd_10=10.119.161.121
 set ip301L_2nd_11=10.119.128.31
+set ip401L_1st_1=10.121.41.195
+set ip401L_1st_2=10.121.41.154
+set ip401L_1st_3=10.121.41.155
+set ip401L_1st_4=10.121.41.196
+set ip401L_1st_5=10.121.41.157
+set ip401L_1st_6=10.121.41.158
+set ip401L_1st_7=10.121.41.197
+set ip401L_1st_8=10.121.41.137
+set ip401L_1st_9=10.121.41.161
+set ip401L_1st_10=10.121.41.162
+set ip401L_1st_11=10.121.41.163
+set ip401L_1st_12=10.121.41.164
+set ip402L_1st_1=10.121.42.161
+set ip402L_1st_2=10.121.42.85
+set ip402L_1st_3=10.121.42.163
+set ip402L_1st_4=10.121.42.164
+set ip402L_1st_5=10.121.42.203
+set ip402L_1st_6=10.121.42.97
+set ip402L_1st_7=10.121.42.201
+set ip402L_1st_8=10.121.42.202
+set ip402L_1st_9=10.121.42.165
+set ip402L_1st_10=10.121.42.166
+set ip402L_1st_11=10.121.42.167
+set ip402L_1st_12=10.121.42.168
+set ip402L_2nd_1=10.121.41.139
+set ip402L_2nd_2=10.121.42.171
+set ip402L_2nd_3=10.121.42.175
+set ip402L_2nd_4=10.121.42.206
+set ip402L_2nd_5=10.121.42.207
+set ip402L_2nd_6=10.121.42.208
+set ip402L_2nd_7=10.121.43.51
+set ip402L_2nd_8=10.121.43.76
+set ip402L_2nd_9=10.121.43.97
+set ip402L_2nd_10=10.121.43.198
+set ip402L_2nd_11=10.121.44.229
+set ip402L_2nd_12=10.121.44.71
+set ip403L_1st_1=10.121.42.71
+set ip403L_1st_2=10.121.42.72
+set ip403L_1st_3=10.121.42.73
+set ip403L_1st_4=10.121.42.74
+set ip403L_1st_5=10.121.42.75
+set ip403L_1st_6=10.121.42.76
+set ip403L_1st_7=10.121.42.77
+set ip403L_1st_8=10.121.42.78
+set ip403L_1st_9=10.121.42.79
+set ip403L_1st_10=10.121.42.80
+set ip403L_1st_11=10.121.42.81
+set ip403L_1st_12=10.121.42.82
 set ip404L_1st_1=10.121.43.77
 set ip404L_1st_2=10.121.43.78
 set ip404L_1st_3=10.121.43.79
@@ -173,4 +221,6 @@ goto :checkping1
 
 :: Script end
 :end
+echo Delete Old Backup Files
+FORFILES /p "D:\Program\RVS\505L Log" /S /M "*Log" /D -60 /C "cmd /c IF @isdir == TRUE rd /S /Q @path"
 exit
