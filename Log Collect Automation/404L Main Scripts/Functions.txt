@@ -1,0 +1,17 @@
+﻿1. 매일 오전 2시 30분, 전날의 Log 취합
+- 취합 대상 파일 : Summary Log, M Log, General Log, Operation Log, Dove2p0_PG.Dove2p0_PG.xml, Emu2p0_PG.Emu2p0_PG.xml, app.settings, sequence, Master (Sequence)
+
+2. Log 취합 시, Log 없을시 No Log.txt 생성 (삭제)
+- 로그 취합 진행 중, 오류로 인해 백업이 되지 않는것이 아닌 Log 가 없어서 취합하지 못하는 경우 취합폴더내에 No log.txt 생성
+
+3. General Logging 기능 True 로 변경
+- 자사 직원 혹은 ISE 인원들이 Appdata 내, General Logging 기능을 False 로 변경해놓는 경우가 있어 해당 기능 매일 True 로 변경
+
+4. General Log, Operation Log 자동삭제 (Windows 7 호환성 업데이트 필요)
+- Appdata 내의 원본 General Log 및 Operation Log 를 생성된지 30일이 지나면 자동으로 삭제
+
+5. Backup Log 자동삭제 (Windows 7 호환성 업데이트 필요)
+- 백업된 Log 를 60일이 지나면 자동으로 삭제
+
+
+\\192.168.1.11\Radiant Vision Systems Data\TrueTest\Sequence\Master
