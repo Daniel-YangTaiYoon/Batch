@@ -214,9 +214,16 @@ xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8\app.setting
 ren "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\app.settings" "%YYYY%%MM%%DD% app.settings"
 xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\%YYYY%%MM%%DD% Operation Log.txt" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\Sequence\*.seqxc" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\Sequence" /C /Q /Y /I
+if exist "\\%demuraip%\Radiant Vision Systems Data\TrueTest\Sequence\Master Sequence" (goto :master1) else (goto :master2)
+:master1
+xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\Sequence\Master Sequence\*.seqxc" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\Master" /C /Q /Y /I
+goto :Generallogging
+:master2
 xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\Sequence\Master\*.seqxc" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\Master" /C /Q /Y /I
+goto :Generallogging
 
 :: Make log.settings file to enable General log setting to true
+:Generallogging
 echo Change General Logging setting...
 Set "out=\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8"
 (

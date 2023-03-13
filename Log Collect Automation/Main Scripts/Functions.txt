@@ -1,13 +1,13 @@
 1. 매일 오전 2시 30분, 전날의 Log 취합 
 - 취합 대상 파일 : Summary Log, M Log, General Log, Operation Log, Dove2p0_PG.Dove2p0_PG.xml, Emu2p0_PG.Emu2p0_PG.xml, app.settings, sequence, Master (Sequence)
 
-2. General Logging 기능 True 로 변경 
+2. 매일 오전 3시, 각 Main PC 에 취합된 Log 를 Master PC 로 재취합
+
+3. General Logging 기능 True 로 변경 
 - 자사 직원 혹은 ISE 인원들이 Appdata 내, General Logging 기능을 False 로 변경해놓는 경우가 있어 해당 기능 매일 True 로 변경
 
-3. General Log, Operation Log 자동삭제 (30일) - 미적용
+4. General Log, Operation Log 자동삭제 (30일)
 - Appdata 내의 원본 General Log 및 Operation Log 를 생성된지 30일이 지나면 자동으로 삭제
 
-4. Backup Log 자동삭제 (60일) - 적용
+5. Backup Log 자동삭제 (60일)
 - 백업된 Log 를 60일이 지나면 자동으로 삭제
-
-5.
