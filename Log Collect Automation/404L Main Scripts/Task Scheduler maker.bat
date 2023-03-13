@@ -1,6 +1,6 @@
 @echo off
 
-set lineno=404
+set lineno=402
 set monocolor=1st
 set /A machineno=1
 

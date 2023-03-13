@@ -2,9 +2,9 @@
 
 echo Start copy log from Demura PC to Main PC
 :: Program Setting
-set Lineno=404
+set Lineno=505
 set monocolor=2nd
-set machineno=12
+set machineno=9
 
 :: Set Date
 ::  day=-1 => Yesterday log(Default setting). day=0 => Today log.

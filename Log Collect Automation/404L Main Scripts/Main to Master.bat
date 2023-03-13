@@ -1,7 +1,7 @@
 @echo off
 
 :: Program Setting
-set Lineno=404
+set Lineno=402
 set monocolor=1st
 
 :: Set Date

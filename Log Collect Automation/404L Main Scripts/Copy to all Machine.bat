@@ -168,9 +168,8 @@ if %machineno%==13 goto :monocolorcheck
 set Mainip=ip%Lineno%L_%monocolor%_%Machineno%
 call set "ip=%%%Mainip%%%"
 echo Copy batch file to %lineno%L %monocolor% #%machineno%
-xcopy "Demura to Main %lineno%L %monocolor% #%machineno%.bat" "\\%ip%\Program\RVS" /C /Q /Y /I /S
-xcopy "%lineno%L %monocolor% #%machineno% log collect scheduler.xml" "\\%ip%\Program\RVS" /C /Q /Y /I /S
-xcopy "ShareRadiantVisionSystemsData.bat" "\\%ip%\Program\RVS" /C /Q /Y /I /S
+xcopy "Demura to Main %lineno%L %monocolor% #%machineno%.bat" "\\%ip%\Program\RVS"
+xcopy "%lineno%L %monocolor% #%machineno% log collect scheduler.xml" "\\%ip%\Program\RVS"
 set /A machineno+=1
 goto :copy
 

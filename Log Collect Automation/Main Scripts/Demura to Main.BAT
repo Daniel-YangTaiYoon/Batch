@@ -2,7 +2,7 @@
 
 echo Start copy log from Demura PC to Main PC
 :: Program Setting
-set Lineno=505
+set Lineno=406
 set monocolor=1st
 set machineno=1
 
@@ -189,7 +189,7 @@ goto :deletebackup
 ::Delete old backup files (After 60 days)
 :deletebackup
 echo Delete Old Backup Files
-FORFILES /p "D:\Program\RVS\Demura Log Collect" /S /M "*Log" /D -60 /C "cmd /c IF @isdir == TRUE rd /S /Q @path"
+forfiles /p "D:\Program\RVS\Demura Log Collect" /s /d -60 /m "*Log" /c "cmd /c IF @isdir == TRUE rd /s /q @path
 goto :ipsetting
 
 :: Set IP
@@ -228,9 +228,11 @@ Set "out=\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8"
 
 :: Delete Original General Log and Operation Log after 30 days
 echo Delete Old General Log...
-FORFILES /p "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8" /S /M "GeneralLogFile_*.txt" /D -30 /C "cmd /c IF @isdir == TRUE rd /S /Q @path"
+PUSHD "\\%demuraip%\Radiant Vision Systems Data"
+forfiles /p "\TrueTest\AppData\1.8" /s /d -30 /m "GeneralLogFile*.txt" /c "cmd /c del @file : date >= 30 days >NUL
 echo Delete Old Operation Log...
-FORFILES /p "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData" /S /M "*Operation Log.txt" /D -30 /C "cmd /c IF @isdir == TRUE rd /S /Q @path"
+forfiles /p "\TrueTest\AppData" /s /d -30 /m "*Operation Log.txt" /c "cmd /c del @file : date >= 30 days >NUL
+POPD
 
 goto :Channelcheck
 

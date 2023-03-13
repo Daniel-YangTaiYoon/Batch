@@ -186,10 +186,10 @@ xcopy "%mlogpath%\POCB_M_LOG_*_*_%yyyy%%mm%%dd%.*" "D:\Program\RVS\Demura Log Co
 xcopy "%mlogpath%\MLog_*_%yyyy%%mm%%dd%_*.*" "D:\Program\RVS\Demura Log Collect\%Mainfld%\M_Log" /C /Q /Y /I /S
 goto :deletebackup
 
-::Delete old backup files
+::Delete old backup files (After 60 days)
 :deletebackup
 echo Delete Old Backup Files
-forfiles /P "D:\Program\RVS\Demura Log Collect" /S /M *.* /D -60 /C "cmd /c del @PATH"
+forfiles /p "D:\Program\RVS\Demura Log Collect" /s /d -60 /m "*Log" /c "cmd /c IF @isdir == TRUE rd /s /q @path
 goto :ipsetting
 
 :: Set IP
@@ -203,6 +203,8 @@ goto :Mainscript
 :Mainscript
 echo Ch %Channelno% Log copy...
 mkdir "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %Channelno%"
+mkdir "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %Channelno%\Sequence"
+mkdir "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %Channelno%\Master"
 xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8\GeneralLogFile_%YYYY%-%MM%-%DD%_*.txt" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8\Dove2p0_PG.Dove2p0_PG.xml" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 ren "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\Dove2p0_PG.Dove2p0_PG.xml" "%YYYY%%MM%%DD% Dove2p0_PG.Dove2p0_PG.xml"
@@ -211,6 +213,8 @@ ren "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\Emu2p0_PG.Emu2p0
 xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8\app.settings" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
 ren "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\app.settings" "%YYYY%%MM%%DD% app.settings"
 xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\%YYYY%%MM%%DD% Operation Log.txt" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%" /C /Q /Y /I /S
+xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\Sequence\*.seqxc" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\Sequence" /C /Q /Y /I
+xcopy "\\%demuraip%\Radiant Vision Systems Data\TrueTest\Sequence\Master\*.seqxc" "D:\Program\RVS\Demura Log Collect\%Mainfld%\Ch %channelno%\Master" /C /Q /Y /I
 
 :: Make log.settings file to enable General log setting to true
 echo Change General Logging setting...
@@ -222,11 +226,13 @@ Set "out=\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8"
   Echo;# When reading the comma-delimited log, the category string is the first string after the date/time entries.
 ) > "%out%\log.settings"
 
-:: Delete General Log and Operation Log was generated before 60 days
+:: Delete Original General Log and Operation Log after 30 days
 echo Delete Old General Log...
-forfiles /P "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData\1.8" /S /M GeneralLogFile_*.txt /D -30 /C "cmd /c del @PATH"
+PUSHD "\\%demuraip%\Radiant Vision Systems Data"
+forfiles /p "\TrueTest\AppData\1.8" /s /d -30 /m "GeneralLogFile*.txt" /c "cmd /c del @file : date >= 30 days >NUL
 echo Delete Old Operation Log...
-forfiles /P "\\%demuraip%\Radiant Vision Systems Data\TrueTest\AppData" /S /M *Operation Log.txt /D -30 /C "cmd /c del @PATH"
+forfiles /p "\TrueTest\AppData" /s /d -30 /m "*Operation Log.txt" /c "cmd /c del @file : date >= 30 days >NUL
+POPD
 
 goto :Channelcheck
 
